@@ -17,7 +17,7 @@
   </Hosts>
 
   <DefaultSettings>
-    <SourceLocation DefaultValue="\\MyShare\MyManifests\HelloWorld\HelloWorld.html"/>
+    <SourceLocation DefaultValue="https://e-conv.github.io/test/HelloWorld.html"/>
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
 </OfficeApp>
