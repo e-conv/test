@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+    <script src="https://appsforoffice.microsoft.com/lib/1.0/hosted/office.js"></script>
+    <script>
+    Office.initialize = function (reason) {
+      $('#msgline').html('done !');
+      $(document).ready(function () {
+        $('#execbtn').click(function(){
+          var docUrl = 'https://spreadsheets.google.com/feeds/cells/' +
+            $('#dockey').val() +
+            '/od6/public/basic/' +
+            $('#doccell').val() +
+            '?alt=json-in-script';
+          $.ajax({
+            url : docUrl,
+            dataType : 'jsonp',
+            jsonp : 'callback',
+            beforeSend:function(xhr){
+              $('#msgline').html('getting from Google ...');
+            },
+            success : function(data, status){
+              $('#msgline').html('done !');
+              if(data.entry.content.type == 'text')
+                Office.context.document.setSelectedDataAsync(data.entry.content.$t);
+            },
+            error : function(){
+              $('#msgline').html('error.');
+            }
+          });
+        });
+      });
+    };
+    </script>
+  </head>
+  <body>
+    <div style="font-weight:bold">Google Data Picker</div>
+    <p>
+    公開している Google Spreadsheet からデータを取得し、
+    選択中のセルに挿入します</p>
+    <div>
+      Document key:
+      <input type="text" id="dockey" /><br />
+      Cell number:
+      <input type="text" id="doccell" value="R1C1" /><br />
+      <input type="button" id="execbtn" value="Execute !" />
+    </div>
+    <p id="msgline" style="background-color:gray;">initializing ...</p>
+  </body>
+</html>
