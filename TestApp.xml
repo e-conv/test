@@ -14,7 +14,7 @@
     <Host Name="Workbook" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="http://localhost/TestApp.html" />
+    <SourceLocation DefaultValue="https://e-conv.github.io/test/TestApp.html" />
     <RequestedWidth>400</RequestedWidth>
     <RequestedHeight>400</RequestedHeight>
   </DefaultSettings>
